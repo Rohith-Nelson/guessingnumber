@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f8ff;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: #4682b4;
+            color: white;
+            padding: 1em 0;
+        }
+
+        .game-container {
+            margin: 20px auto;
+            max-width: 500px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+        }
+
+        .game-container img {
+            width: 100%;
+            max-height: 200px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .message {
+            font-size: 1.2em;
+            margin: 10px 0;
+        }
+
+        .input-area {
+            margin: 20px 0;
+        }
+
+        input[type="number"] {
+            padding: 10px;
+            font-size: 1em;
+            border: 2px solid #4682b4;
+            border-radius: 5px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1em;
+            background-color: #4682b4;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #5a9bd3;
+        }
+        if
+        
+        
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Number Guessing Game</h1>
+    </header>
+    <div class="game-container">
+        <img id="feedback-image" src="https://media.istockphoto.com/id/1166389374/photo/photo-of-guessing-broody-lady-intending-to-understand-what-people-out-there-are-speaking.jpg?s=612x612&w=0&k=20&c=_1rOXtokCWiMFT6KJx_uY0bo4-gcs_21Dj0lBCm577o=" alt="Feedback">
+        <p class="message" id="message">Guess a number between 1 and 100!</p>
+        <div class="input-area">
+            <input type="number" id="guess-input" placeholder="Enter your guess">
+            <button onclick="checkGuess()">Guess</button>
+        </div>
+        <p id="attempts">Attempts: 0</p>
+    </div>
+
+    <script>
+        const randomNumber = Math.floor(Math.random() * 100) + 1;
+        let attempts = 0;
+        const messageEl = document.getElementById('message');
+        const imageEl = document.getElementById('feedback-image');
+        const attemptsEl = document.getElementById('attempts');
+
+        function checkGuess() {
+            const guess = parseInt(document.getElementById('guess-input').value);
+            attempts++;
+            attemptsEl.textContent = `Attempts: ${attempts}`;
+
+            if (isNaN(guess) || guess < 1 || guess > 100) {
+                messageEl.textContent = 'Please enter a valid number between 1 and 100!';
+                imageEl.src = 'https://via.placeholder.com/400x200?text=Invalid+Input';
+                return;
+            }
+
+            if (guess === randomNumber) {
+                messageEl.textContent = 'Congratulations! You guessed it right!';
+                imageEl.src = 'https://media.istockphoto.com/id/1303507261/photo/portrait-of-a-smiling-asian-businesswoman.jpg?s=612x612&w=0&k=20&c=xSvTs8GIXle4fKcZpAdH-Mn8o0wu-N_5hMVlrT-bsC0=';
+            } else if (guess < randomNumber) {
+                messageEl.textContent = 'Too low! Try again.';
+                imageEl.src = 'https://img.freepik.com/free-vector/stock-market-decline-downfall-red-falling-arrow_1017-37132.jpg';
+            } else {
+                messageEl.textContent = 'Too high! Try again.';
+                imageEl.src = 'https://media.istockphoto.com/id/1250237213/photo/red-arrow-moving-up-over-graph-paper.jpg?s=612x612&w=0&k=20&c=YnX8Wb4_s0evUQcoI5GFyH0SzpS1NIvRPm2TQsCgyjY=';
+            }
+        }
+    </script>
+</body>
+</html>
